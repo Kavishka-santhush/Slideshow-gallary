@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .bigimg {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto 0px auto;
+            width: 1000px;
+            position: relative;
+        }
+
+        .mark {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: white 2px solid;
+            border-radius: 20px;
+            height: 50px;
+            padding: 10px;
+            position: absolute;
+        }
+
+        .mark:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+
+        .previouse {
+            top: 100px;
+            left: -80px;
+        }
+
+        .next {
+            top: 100px;
+            right: -80px;
+        }
+
+        .imglist {
+            display: grid;
+            width: 1000px;
+            margin: 20px auto 0px auto;
+            justify-content: center;
+            gap: 0px;
+            grid-template-columns: auto auto auto;
+        }
+
+        .img {
+            height: 100px;
+            width: 200px;
+            opacity: 0.2;
+            cursor: pointer;
+        }
+
+        .active {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigimg">
+        <h2 class="mark previouse" onclick="changenum(-1)">previouse</h2>
+        <img src="Screenshot_1.png" class="bigimage" />
+        <h2 class="mark next" onclick="changenum(1)">next</h2>
+    </div>
+    <div class="imglist">
+        <img src="Screenshot_4.png" class="img" />
+        <img src="Screenshot_3.png" class="img" />
+        <img src="Screenshot_5.png" class="img" />
+    </div>
+    <script>
+        bigimage = document.getElementsByClassName("bigimage")[0];
+        img = document.getElementsByClassName("img");
+        img[0].classList.add("active");
+
+        imagenum = 0;
+
+        images = ["file:///C:/Users/Kavishka/Desktop/html/Screenshot_1.png", "file:///C:/Users/Kavishka/Desktop/html/Screenshot_6.png", "file:///C:/Users/Kavishka/Desktop/html/Screenshot_2.png"]
+
+        for (i = 0; i < 3; i++) {
+            img[i].addEventListener("click", function () {
+                for (i = 0; i < 3; i++) {
+                    img[i].classList.remove("active");
+                }
+                this.classList.add("active");
+                if (this.src == "file:///C:/Users/Kavishka/Desktop/html/Screenshot_4.png") {
+                    bigimage.src = "file:///C:/Users/Kavishka/Desktop/html/Screenshot_1.png";
+                }
+                else if (this.src == "file:///C:/Users/Kavishka/Desktop/html/Screenshot_3.png") {
+                    bigimage.src = "file:///C:/Users/Kavishka/Desktop/html/Screenshot_6.png";
+                }
+                else {
+                    bigimage.src = "file:///C:/Users/Kavishka/Desktop/html/Screenshot_2.png";
+                }
+            });
+        }
+
+        function changenum(num) {
+            imagenum += num;
+            if (imagenum == 3) {
+                imagenum = 0;
+            }
+            if (imagenum == -1) {
+                imagenum = 2;
+            }
+            changeimg(imagenum);
+        }
+
+        function changeimg(imagenum) {
+            bigimage.src = images[imagenum];
+            for (i = 0; i < 3; i++) {
+                img[i].classList.remove("active");
+            }
+            img[imagenum].classList.add("active");
+        }
+    </script>
+</body>
+
+</html>
